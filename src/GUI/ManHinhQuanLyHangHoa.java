@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -12,6 +14,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import BUS.MatHangBUS;
+import DTO.MatHangDTO;
 
 public class ManHinhQuanLyHangHoa {
 
@@ -85,6 +88,7 @@ public class ManHinhQuanLyHangHoa {
 		lblnGi.setBounds(30, 65, 90, 15);
 
 		txt_donGia = new Text(grpDetails, SWT.BORDER);
+		txt_donGia.setText("0");
 		txt_donGia.setBounds(126, 62, 140, 21);
 
 		lblGhiCh = new Label(grpDetails, SWT.NONE);
@@ -98,12 +102,30 @@ public class ManHinhQuanLyHangHoa {
 		grpDanhSch.setText("Danh sách");
 		grpDanhSch.setBounds(10, 147, 564, 169);
 
-		tbl_danhSachMatHang = new Table(grpDanhSch, SWT.BORDER | SWT.FULL_SELECTION);
+		tbl_danhSachMatHang = new Table(grpDanhSch, SWT.BORDER | SWT.FULL_SELECTION | SWT.VIRTUAL);
 		tbl_danhSachMatHang.setBounds(30, 29, 505, 117);
 		tbl_danhSachMatHang.setHeaderVisible(true);
 		tbl_danhSachMatHang.setLinesVisible(true);
 
 		Button btnThem = new Button(mainShell, SWT.NONE);
+		btnThem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MatHangDTO matHangDTO = new MatHangDTO();
+				matHangDTO.setMaMatHang(txt_maMatHang.getText().toString());
+				matHangDTO.setTenMatHang(txt_tenMatHang.getText().toString());
+				matHangDTO.setDonGia(Float.parseFloat(txt_donGia.getText().toString()));
+				matHangDTO.setMoTa(txt_moTa.getText().toString());
+
+				if (MatHangBUS.ThemMatHang(matHangDTO)) {
+					JOptionPane.showMessageDialog(null, null, "Thêm thành công!", JOptionPane.INFORMATION_MESSAGE);
+					MatHangBUS.HienThiDanhSachMatHang(tbl_danhSachMatHang);
+				} else {
+					JOptionPane.showMessageDialog(null, "Các trường không thể bỏ trống, đơn giá phải là số dương!",
+							"Không hợp lệ!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnThem.setBounds(10, 356, 75, 25);
 		btnThem.setText("Thêm");
 
