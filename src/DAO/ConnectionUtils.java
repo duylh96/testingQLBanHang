@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtils {
+	//khong dung toi
 
 	public static Connection getMyConnection() throws SQLException, ClassNotFoundException {
 		String hostName = "localhost";
-		String sqlInstanceName = "SQLEXPRESS";
+		String sqlInstanceName = "MSSSQLSERVER";
 		String database = "QLBanHang";
-		String userName = "sa";
-		String password = "Tivippro1996uit";
+		String userName ="sa" ;
+		String password = "1234";
 
 		return getSQLServerConnection(hostName, sqlInstanceName, database, userName, password);
 	}

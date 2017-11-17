@@ -10,10 +10,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-
 import DTO.MatHangDTO;
+import GUI.ManHinhQuanLyHangHoa;
+
 
 public class MatHangDAO {
+ 
+  
+	 
 
 	public static boolean ThemMatHang(MatHangDTO mh) {
 		boolean result = false;
@@ -47,6 +51,65 @@ public class MatHangDAO {
 		}
 		return result;
 	}
+	
+	//Xoa mat hang
+	public static boolean XoaMatHang(MatHangDTO mh) {
+		boolean result = false;
+		
+		// Lấy ra kết nối tới cơ sở dữ liệu.
+		Connection connection;
+		
+		try {
+			connection = ConnectionUtils.getMyConnection();
+			
+			// Tạo một câu SQL 
+			String sql = "delete from  MATHANG where MaMatHang="+"'"+ManHinhQuanLyHangHoa.maMH+"'";
+		 
+			// Tạo một đối tượng PreparedStatement.
+			PreparedStatement pstm = connection.prepareStatement(sql);
+			pstm.executeUpdate();
+
+			result = true;
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean SuaMatHang(MatHangDTO mh) {
+		boolean result = false;
+		
+		// Lấy ra kết nối tới cơ sở dữ liệu.
+		Connection connection;
+		
+		try {
+			connection = ConnectionUtils.getMyConnection();
+			
+			// Tạo một câu SQL 
+			String sql = "update MATHANG set TenMatHang='"+ManHinhQuanLyHangHoa.tenMH+"', DonGia='"+ManHinhQuanLyHangHoa.donGia+"', MoTa='"+ManHinhQuanLyHangHoa.moTa+"' where MaMatHang='"+ManHinhQuanLyHangHoa.maMH+"'";
+		 
+			// Tạo một đối tượng PreparedStatement.
+			PreparedStatement pstm = connection.prepareStatement(sql);
+			pstm.executeUpdate();
+
+			result = true;
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
 
 	public static boolean LoadDanhSachMatHang(Table tbl_danhSachMatHang) {
 

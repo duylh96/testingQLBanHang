@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.Table;
 
 import DAO.MatHangDAO;
 import DTO.MatHangDTO;
+import GUI.ManHinhQuanLyHangHoa;
 
 public class MatHangBUS {
 
@@ -13,6 +14,19 @@ public class MatHangBUS {
 			return MatHangDAO.ThemMatHang(mh);
 		}
 		return false;
+	}
+	
+	public static boolean XoaMatHang(MatHangDTO mh) {
+
+			return MatHangDAO.XoaMatHang(mh);
+		
+	}
+	
+	public static boolean SuaMatHang(MatHangDTO mh) {
+	
+			return MatHangDAO.SuaMatHang(mh);
+		
+		
 	}
 
 	public static boolean KiemTraMatHangHopLe(MatHangDTO mh) {
@@ -30,4 +44,7 @@ public class MatHangBUS {
 	public static boolean HienThiDanhSachMatHang(Table tbl_danhSachMatHang) {
 		return MatHangDAO.LoadDanhSachMatHang(tbl_danhSachMatHang);
 	}
+	
+	
+			
 }
