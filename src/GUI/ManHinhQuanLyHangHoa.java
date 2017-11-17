@@ -1,16 +1,24 @@
 package GUI;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JOptionPane;
 
+
 import org.eclipse.swt.SWT;
+
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import BUS.MatHangBUS;
@@ -27,7 +35,10 @@ public class ManHinhQuanLyHangHoa {
 	private Label lblGhiCh;
 	private Text txt_moTa;
 	private Table tbl_danhSachMatHang;
-
+	public static String maMH;
+	public static String tenMH;
+	public static String moTa;
+	public static float donGia;
 	/**
 	 * Launch the application.
 	 * 
@@ -40,6 +51,7 @@ public class ManHinhQuanLyHangHoa {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**
@@ -55,6 +67,13 @@ public class ManHinhQuanLyHangHoa {
 				display.sleep();
 			}
 		}
+	}
+	private String tachChuoi(String s)
+	{
+	
+		 String chuoiDT = s.substring(s.indexOf("{")+1,s.indexOf("}"));
+	     return chuoiDT;
+		
 	}
 
 	/**
@@ -106,7 +125,28 @@ public class ManHinhQuanLyHangHoa {
 		tbl_danhSachMatHang.setBounds(30, 29, 505, 117);
 		tbl_danhSachMatHang.setHeaderVisible(true);
 		tbl_danhSachMatHang.setLinesVisible(true);
-
+		
+		//lay maMH
+		 tbl_danhSachMatHang.addListener(SWT.Selection, new Listener() {
+		      public void handleEvent(Event e) {
+		        String string = "";
+		        TableItem[] selection = tbl_danhSachMatHang.getSelection();
+		       for (int i = 0; i < selection.length; i++)
+		          string += selection[i] + " ";
+		       		maMH=tachChuoi(string);
+		       		
+		       	  TableItem item = tbl_danhSachMatHang.getItem(tbl_danhSachMatHang.getSelectionIndex());
+		       	  txt_maMatHang.setText(item.getText(0));
+		       	  txt_tenMatHang.setText(item.getText(1));
+		       	  txt_donGia.setText(item.getText(2));
+		       	  txt_moTa.setText(item.getText(3));
+		       	  
+		      
+		      }
+		    });
+	
+		
+		
 		Button btnThem = new Button(mainShell, SWT.NONE);
 		btnThem.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -150,8 +190,52 @@ public class ManHinhQuanLyHangHoa {
 		Button btnXoa = new Button(mainShell, SWT.NONE);
 		btnXoa.setBounds(418, 356, 75, 25);
 		btnXoa.setText("Xóa");
+		
+		btnXoa.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MatHangDTO matHangDTO = new MatHangDTO();
 
+				if (MatHangBUS.XoaMatHang(matHangDTO)) {
+					JOptionPane.showMessageDialog(null, null, "Xóa thành công!", JOptionPane.INFORMATION_MESSAGE);
+					MatHangBUS.HienThiDanhSachMatHang(tbl_danhSachMatHang);
+				} else {
+					JOptionPane.showMessageDialog(null, "Không thành công!",
+							"Không hợp lệ!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		btnCapNhat.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MatHangDTO matHangDTO = new MatHangDTO();
+			  	  
+		       	tenMH=txt_tenMatHang.getText().toString();
+				donGia=Float.parseFloat(txt_donGia.getText().toString());
+				moTa=txt_moTa.getText().toString();
+				if (MatHangBUS.SuaMatHang(matHangDTO)) {
+					JOptionPane.showMessageDialog(null, null, "Cập nhật thành công!", JOptionPane.INFORMATION_MESSAGE);
+					MatHangBUS.HienThiDanhSachMatHang(tbl_danhSachMatHang);
+				} else {
+					JOptionPane.showMessageDialog(null, "Cập nhật Không thành công!",
+							"Không hợp lệ!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		
 		// first load
 		MatHangBUS.HienThiDanhSachMatHang(tbl_danhSachMatHang);
+		
+	
+		 
+		
+	    
+		tbl_danhSachMatHang.getHorizontalBar().setEnabled(false);
+		//lay mã mặt hàng từ bảng
+		  
 	}
+	
+	
 }
