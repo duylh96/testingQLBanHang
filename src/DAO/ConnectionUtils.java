@@ -16,7 +16,7 @@ public class ConnectionUtils {
 		return getSQLServerConnection(hostName, sqlInstanceName, database, userName, password);
 	}
 
-	private static Connection getSQLServerConnection(String hostName, String sqlInstanceName, String database,
+	public static Connection getSQLServerConnection(String hostName, String sqlInstanceName, String database,
 			String userName, String password) throws SQLException {
 
 		// jdbc:sqlserver://ServerIp:1433/SQLEXPRESS;databaseName=QLBanHang
