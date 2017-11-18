@@ -8,11 +8,18 @@ public class ConnectionUtils {
 	//khong dung toi
 
 	public static Connection getMyConnection() throws SQLException, ClassNotFoundException {
+//		String hostName = "localhost";
+//		String sqlInstanceName = "MSSSQLSERVER";
+//		String database = "QLBanHang";
+//		String userName ="sa" ;
+//		String password = "1234";
+		
+		//Hoang Duy
 		String hostName = "localhost";
-		String sqlInstanceName = "MSSSQLSERVER";
+		String sqlInstanceName = "SQLEXPRESS";
 		String database = "QLBanHang";
-		String userName ="sa" ;
-		String password = "1234";
+		String userName = "sa";
+		String password = "Tivippro1996uit";
 
 		return getSQLServerConnection(hostName, sqlInstanceName, database, userName, password);
 	}

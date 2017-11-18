@@ -1,7 +1,6 @@
 package DTO;
 
 public class MatHangDTO {
-	//Khong dung toi
 
 	private String maMatHang;
 	private String tenMatHang;
