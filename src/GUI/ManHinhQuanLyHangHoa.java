@@ -65,7 +65,7 @@ public class ManHinhQuanLyHangHoa {
 		}
 	}
 
-	private String tachChuoi(String s) {
+	public static String tachChuoi(String s) {
 
 		String chuoiDT = s.substring(s.indexOf("{") + 1, s.indexOf("}"));
 		return chuoiDT;
