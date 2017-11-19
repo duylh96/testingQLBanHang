@@ -73,9 +73,11 @@ public class MatHangDAO {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result = false;
 		}
 		return result;
 	}
@@ -103,9 +105,11 @@ public class MatHangDAO {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result = false;
 		}
 		return result;
 	}
@@ -115,7 +119,7 @@ public class MatHangDAO {
 		if (tbl_danhSachMatHang == null) {
 			return false;
 		}
-		
+
 		tbl_danhSachMatHang.clearAll();
 		TableColumn tc1 = new TableColumn(tbl_danhSachMatHang, SWT.CENTER);
 		TableColumn tc2 = new TableColumn(tbl_danhSachMatHang, SWT.CENTER);
