@@ -1,10 +1,11 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import DAO.MatHangDAO;
+import BUS.MatHangBUS;
 import DTO.MatHangDTO;
 
 public class TestFunctionThemMatHang {
@@ -12,16 +13,16 @@ public class TestFunctionThemMatHang {
 	@Test
 	// test : mặt hàng không có giá trị
 	public void test1() {
-		MatHangDTO matHangDTO = new MatHangDTO();
-		assertFalse(MatHangDAO.ThemMatHang(matHangDTO));
+		MatHangDTO matHangDTO = new MatHangDTO("", "", "", 0);
+		assertFalse(MatHangBUS.ThemMatHang(matHangDTO));
 	}
 
 	@Test
 	// test : mặt hàng có mã mặt hàng trùng với cái đã có sẵn
 	public void test2() {
-		MatHangDTO matHangDTO = new MatHangDTO();
+		MatHangDTO matHangDTO = new MatHangDTO("", "", "", 0);
 		matHangDTO.setMaMatHang("mh001");
-		assertFalse(MatHangDAO.ThemMatHang(matHangDTO));
+		assertFalse(MatHangBUS.ThemMatHang(matHangDTO));
 	}
 
 	// @Test
@@ -29,6 +30,6 @@ public class TestFunctionThemMatHang {
 	public void test3() {
 		MatHangDTO matHangDTO = new MatHangDTO("mh010", "Dell Vostro 3559",
 				"Laptop Dell vostro 3559 siu phẩm mạnh mẽ...", 15000000);
-		assertTrue(MatHangDAO.ThemMatHang(matHangDTO));
+		assertTrue(MatHangBUS.ThemMatHang(matHangDTO));
 	}
 }
