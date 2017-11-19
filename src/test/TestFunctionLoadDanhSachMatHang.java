@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Table;
 import org.junit.Before;
 import org.junit.Test;
 
-import DAO.MatHangDAO;
+import BUS.MatHangBUS;
 
 public class TestFunctionLoadDanhSachMatHang {
 
@@ -28,12 +28,12 @@ public class TestFunctionLoadDanhSachMatHang {
 	@Test
 	public void test1() {
 		Table table1 = new Table(grpDanhSch, SWT.BORDER | SWT.FULL_SELECTION | SWT.VIRTUAL);
-		assertTrue(MatHangDAO.LoadDanhSachMatHang(table1));
+		assertTrue(MatHangBUS.HienThiDanhSachMatHang(table1));
 	}
 
 	@Test
 	public void test2() {
 		Table table = null;
-		assertFalse(MatHangDAO.LoadDanhSachMatHang(table));
+		assertFalse(MatHangBUS.HienThiDanhSachMatHang(table));
 	}
 }
