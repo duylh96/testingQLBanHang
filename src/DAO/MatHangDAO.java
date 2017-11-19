@@ -10,14 +10,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+
 import DTO.MatHangDTO;
 import GUI.ManHinhQuanLyHangHoa;
 
-
 public class MatHangDAO {
- 
-  
-	 
 
 	public static boolean ThemMatHang(MatHangDTO mh) {
 		boolean result = false;
@@ -53,20 +50,20 @@ public class MatHangDAO {
 		}
 		return result;
 	}
-	
-	//Xoa mat hang
+
+	// Xoa mat hang
 	public static boolean XoaMatHang(MatHangDTO mh) {
 		boolean result = false;
-		
+
 		// Lấy ra kết nối tới cơ sở dữ liệu.
 		Connection connection;
-		
+
 		try {
 			connection = ConnectionUtils.getMyConnection();
-			
-			// Tạo một câu SQL 
-			String sql = "delete from  MATHANG where MaMatHang="+"'"+ManHinhQuanLyHangHoa.maMH+"'";
-		 
+
+			// Tạo một câu SQL
+			String sql = "delete from  MATHANG where MaMatHang=" + "'" + ManHinhQuanLyHangHoa.maMH + "'";
+
 			// Tạo một đối tượng PreparedStatement.
 			PreparedStatement pstm = connection.prepareStatement(sql);
 			pstm.executeUpdate();
@@ -82,19 +79,21 @@ public class MatHangDAO {
 		}
 		return result;
 	}
-	
+
 	public static boolean SuaMatHang(MatHangDTO mh) {
 		boolean result = false;
-		
+
 		// Lấy ra kết nối tới cơ sở dữ liệu.
 		Connection connection;
-		
+
 		try {
 			connection = ConnectionUtils.getMyConnection();
-			
-			// Tạo một câu SQL 
-			String sql = "update MATHANG set TenMatHang='"+ManHinhQuanLyHangHoa.tenMH+"', DonGia='"+ManHinhQuanLyHangHoa.donGia+"', MoTa='"+ManHinhQuanLyHangHoa.moTa+"' where MaMatHang='"+ManHinhQuanLyHangHoa.maMH+"'";
-		 
+
+			// Tạo một câu SQL
+			String sql = "update MATHANG set TenMatHang='" + ManHinhQuanLyHangHoa.tenMH + "', DonGia='"
+					+ ManHinhQuanLyHangHoa.donGia + "', MoTa='" + ManHinhQuanLyHangHoa.moTa + "' where MaMatHang='"
+					+ ManHinhQuanLyHangHoa.maMH + "'";
+
 			// Tạo một đối tượng PreparedStatement.
 			PreparedStatement pstm = connection.prepareStatement(sql);
 			pstm.executeUpdate();
@@ -110,11 +109,13 @@ public class MatHangDAO {
 		}
 		return result;
 	}
-	
-	
 
 	public static boolean LoadDanhSachMatHang(Table tbl_danhSachMatHang) {
 
+		if (tbl_danhSachMatHang == null) {
+			return false;
+		}
+		
 		tbl_danhSachMatHang.clearAll();
 		TableColumn tc1 = new TableColumn(tbl_danhSachMatHang, SWT.CENTER);
 		TableColumn tc2 = new TableColumn(tbl_danhSachMatHang, SWT.CENTER);
@@ -144,8 +145,9 @@ public class MatHangDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		tbl_danhSachMatHang.redraw();
-		return false;
+		return true;
 	}
 }
