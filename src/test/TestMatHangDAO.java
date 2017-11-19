@@ -9,7 +9,7 @@ import BUS.MatHangBUS;
 import DAO.MatHangDAO;
 import DTO.MatHangDTO;
 
-public class testMatHangDAO {
+public class TestMatHangDAO {
 
 // Không tiến hành kiểm tra xóa và sửa tại vì hàm xóa, sẽ dựa vào vị trí con trỏ để xóa mặt hàng 
 //nên không có vụ true/false được, sửa cũng dựa vào dữ liệu ở các textview, mà đã có hàm kiểm

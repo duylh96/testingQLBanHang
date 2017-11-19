@@ -7,27 +7,27 @@ import org.junit.Test;
 
 import GUI.ManHinhQuanLyHangHoa;
 
-public class testTachChuoi {
+public class TestTachChuoi {
 	
 	//ham tach chuoi ben trong, vd: love is {beautiful} => beautiful
 	
-	//kiem tra ko hop le
+	//kiem tra ko hop le(chuoi trong hoac khong ton tai dau {})
 	@Test
-	public void testNull() {
+	public void testChuoiTrong() {
 			String s="beautiful";
 			assertEquals(s, ManHinhQuanLyHangHoa.tachChuoi(""));
 
 	}
 	
 	@Test
-	public void testNotContain() {
+	public void testKhongTonTai() {
 			String s="beautiful";
 			assertEquals(s, ManHinhQuanLyHangHoa.tachChuoi("love is beautiful"));
 
 	}
 	
 	@Test
-	public void testNotContain_1() {
+	public void testKhongTonTai_1() {
 			String s="beautiful";
 			assertEquals(s, ManHinhQuanLyHangHoa.tachChuoi("love is [beautiful] "));
 
@@ -35,7 +35,7 @@ public class testTachChuoi {
 	
 	//kiem tra hop le
 	@Test
-	public void testContain() {
+	public void testTonTai() {
 			String s="beautiful";
 			assertEquals(s, ManHinhQuanLyHangHoa.tachChuoi("love is {beautiful} "));
 
